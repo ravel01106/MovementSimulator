@@ -6,6 +6,7 @@ public class Personaje {
     private int cordenadaX;
     private int cordenadaY;
     private int velocidad;
+    private boolean montarBicicleta;
 
     // CONSTRUCTOR
     public Personaje(String nombre) {
@@ -16,37 +17,45 @@ public class Personaje {
     }
 
     // METODOS ACCESO
-    public String nombre() {
+
+    public String getNombre() {
         return nombre;
     }
 
-    public int cordenadaX() {
-        return cordenadaX;
-    }
-
-    public int cordenadaY() {
-        return cordenadaY;
-    }
-
-    public int velocidad() {
-        return velocidad;
-    }
-
-    public void nombre(String nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public void cordenadaX(int cordenadaX) {
+    public int getCordenadaX() {
+        return cordenadaX;
+    }
+
+    public void setCordenadaX(int cordenadaX) {
         this.cordenadaX = cordenadaX;
     }
 
-    public void cordenadaY(int cordenadaY) {
+    public int getCordenadaY() {
+        return cordenadaY;
+    }
+
+    public void setCordenadaY(int cordenadaY) {
         this.cordenadaY = cordenadaY;
     }
 
-    public void velocidad(int velocidad) {
+    public int getVelocidad() {
+        return velocidad;
+    }
+
+    public void setVelocidad(int velocidad) {
         this.velocidad = velocidad;
     }
 
-}
+    public boolean isMontarBicicleta() {
+        return montarBicicleta;
+    }
 
+    public void setMontarBicicleta(boolean montarBicicleta) {
+        this.montarBicicleta = montarBicicleta;
+    }
+
+}
