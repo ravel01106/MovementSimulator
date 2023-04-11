@@ -9,14 +9,14 @@ public class Personaje {
     private boolean montarBicicleta;
 
     // CONSTRUCTOR
+
     public Personaje(String nombre) {
         this.nombre = nombre;
         this.cordenadaX = 0;
         this.cordenadaY = 0;
         this.velocidad = 1;
+        this.montarBicicleta = false;
     }
-
-    // METODOS ACCESO
 
     public String getNombre() {
         return nombre;
@@ -50,7 +50,7 @@ public class Personaje {
         this.velocidad = velocidad;
     }
 
-    public boolean isMontarBicicleta() {
+    public boolean setMontarBicicleta() {
         return montarBicicleta;
     }
 
