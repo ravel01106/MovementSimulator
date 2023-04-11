@@ -1,4 +1,4 @@
-package net.juego.mapa.generadormapa;
+package net.juego.utils.generadormapa;
 
 public class GeneradorDeMapas {
 

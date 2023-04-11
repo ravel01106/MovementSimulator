@@ -1,6 +1,6 @@
 package net.juego.mapa;
 
-import net.juego.mapa.generadormapa.GeneradorDeMapas;
+import net.juego.utils.generadormapa.GeneradorDeMapas;
 
 public class Mapa {
     private int tamanioMapa;
