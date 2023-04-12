@@ -17,7 +17,7 @@ public class GeneradorDeMapas {
         msg = "";
         for (int i = 0; i < mapaGenerado.length; i++) {
             for (int j = 0; j < mapaGenerado.length; j++) {
-                if(i == 0 | i == mapaGenerado.length - 1 | j == 0 | j == mapaGenerado.length - 1){
+                if(i == 0 || i == mapaGenerado.length - 1 || j == 0 || j == mapaGenerado.length - 1){
                     mapaGenerado[i][j] = "#";
                 }else{
                     mapaGenerado[i][j] = "X";
