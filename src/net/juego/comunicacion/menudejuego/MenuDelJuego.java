@@ -31,31 +31,50 @@ public class MenuDelJuego {
     }
     public void desplazarPersonaje(String movimiento){
         String msg = "";
-        int cordenadaYDelJugador =jugador.getCordenadaY();
-        int cordenadaXDelJugador =jugador.getCordenadaX();
-        int velocidad = jugador.getVelocidad();
         String[][] mapaAnterior = mapa.getMapaGenerado();
+        int posicion;
+        boolean seMueve = false;
+        //TODO: quitar el condicional y ponerlo cuando imprima al jugador
         switch (movimiento.toLowerCase()) {
             case "w":
-                jugador.setCordenadaY(cordenadaYDelJugador + velocidad);
+                posicion = jugador.getCordenadaY() - jugador.getVelocidad();
+                if(posicion > 0 || posicion < mapa.getMapaGenerado().length - 1){
+                    jugador.setCordenadaY(posicion);
+                    seMueve = true;
+                }
+                
                 break;
 
             case "s":
-            jugador.setCordenadaY(cordenadaYDelJugador - velocidad);
+            posicion = jugador.getCordenadaY() + jugador.getVelocidad();
+            if(posicion > 0 || posicion < mapa.getMapaGenerado().length - 1){
+                jugador.setCordenadaY(posicion);
+                seMueve = true;
+            }
                 break;
 
             case "a":
-            jugador.setCordenadaX(cordenadaXDelJugador - velocidad);
+            posicion = jugador.getCordenadaX() - jugador.getVelocidad();
+            if(posicion > 0 || posicion < mapa.getMapaGenerado().length - 1){
+                jugador.setCordenadaX(posicion);
+                seMueve = true;
+            }
                 break;
 
             case "d":
-            jugador.setCordenadaX(cordenadaXDelJugador + velocidad);
+            posicion = jugador.getCordenadaX() + jugador.getVelocidad();
+            if(posicion > 0 || posicion < mapa.getMapaGenerado().length - 1){
+                jugador.setCordenadaX(posicion);
+                seMueve = true;
+            }
                 break;
 
             default:
                 msg = "No se puede mover el jugador :V";
                 break;
-
+        }
+        if(!seMueve){
+            msg = "Te vas a comer el muro mamarracho :V";
         }
         /* 
         mapaAnterior[jugador.getCordenadaY()][jugador.getCordenadaX()] = "O";

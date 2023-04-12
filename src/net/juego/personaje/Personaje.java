@@ -9,11 +9,11 @@ public class Personaje {
     private boolean montarBicicleta;
 
     // CONSTRUCTOR
-
+    // TODO: poner los movimientos aqui
     public Personaje(String nombre) {
         this.nombre = nombre;
-        this.cordenadaX = 1;
-        this.cordenadaY = 1;
+        this.cordenadaX = 0;
+        this.cordenadaY = 0;
         this.velocidad = 1;
         this.montarBicicleta = false;
     }

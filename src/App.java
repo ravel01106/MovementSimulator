@@ -5,7 +5,7 @@ import net.juego.personaje.Personaje;
 public class App {
     public static void main(String[] args) throws Exception {
         System.out.println("Hello, World!");
-        Mapa nuevoMapa = new Mapa(6);
+        Mapa nuevoMapa = new Mapa(10);
         Personaje jugador = new Personaje("Saul");
         MenuDelJuego menu = new MenuDelJuego(nuevoMapa, jugador);
        /*  menu.desplazarPersonaje("w");
