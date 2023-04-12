@@ -12,8 +12,8 @@ public class Personaje {
 
     public Personaje(String nombre) {
         this.nombre = nombre;
-        this.cordenadaX = 0;
-        this.cordenadaY = 0;
+        this.cordenadaX = 1;
+        this.cordenadaY = 1;
         this.velocidad = 1;
         this.montarBicicleta = false;
     }
