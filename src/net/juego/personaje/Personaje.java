@@ -58,4 +58,20 @@ public class Personaje {
         this.montarBicicleta = montarBicicleta;
     }
 
+    public void moverDercha() {
+        this.cordenadaX += this.velocidad;
+    }
+
+    public void moverIzquierda() {
+        this.cordenadaX -= this.velocidad;
+    }
+
+    public void moverArriba() {
+        this.cordenadaY -= this.velocidad;
+    }
+
+    public void moverAbajo() {
+        this.cordenadaY += this.velocidad;
+    }
+
 }

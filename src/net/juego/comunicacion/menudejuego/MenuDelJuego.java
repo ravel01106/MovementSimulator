@@ -6,89 +6,88 @@ import net.juego.personaje.Personaje;
 public class MenuDelJuego {
     private Personaje jugador;
     private Mapa mapa;
-    public MenuDelJuego(Mapa mapa, Personaje jugador){
+
+    public MenuDelJuego(Mapa mapa, Personaje jugador) {
         this.jugador = jugador;
         this.mapa = mapa;
     }
 
-    public void montarBicicleta(){
+    public void montarBicicleta() {
         String msg = "El personaje ya se encuentra en la bicicleta.";
-        if(!jugador.setMontarBicicleta()){
+        if (!jugador.setMontarBicicleta()) {
             jugador.setMontarBicicleta(true);
             jugador.setVelocidad(2);
-        }else{
+        } else {
             System.out.println(msg);
         }
     }
-    public void caminando(){
+
+    public void caminando() {
         String msg = "El personaje ya estabacaminando.";
-        if(jugador.setMontarBicicleta()){
+        if (jugador.setMontarBicicleta()) {
             jugador.setMontarBicicleta(false);
             jugador.setVelocidad(1);
-        }else{
+        } else {
             System.out.println(msg);
         }
     }
-    public void desplazarPersonaje(String movimiento){
+
+    public void desplazarPersonaje(String movimiento) {
         String msg = "";
         String[][] mapaAnterior = mapa.getMapaGenerado();
         int posicion;
-        boolean seMueve = false;
-        //TODO: quitar el condicional y ponerlo cuando imprima al jugador
+
+        // TODO: quitar el condicional y ponerlo cuando imprima al jugador
         switch (movimiento.toLowerCase()) {
             case "w":
-                posicion = jugador.getCordenadaY() - jugador.getVelocidad();
-                if(posicion > 0 || posicion < mapa.getMapaGenerado().length - 1){
-                    jugador.setCordenadaY(posicion);
-                    seMueve = true;
-                }
-                
+                jugador.moverArriba();
                 break;
 
             case "s":
-            posicion = jugador.getCordenadaY() + jugador.getVelocidad();
-            if(posicion > 0 || posicion < mapa.getMapaGenerado().length - 1){
-                jugador.setCordenadaY(posicion);
-                seMueve = true;
-            }
+                jugador.moverAbajo();
                 break;
 
             case "a":
-            posicion = jugador.getCordenadaX() - jugador.getVelocidad();
-            if(posicion > 0 || posicion < mapa.getMapaGenerado().length - 1){
-                jugador.setCordenadaX(posicion);
-                seMueve = true;
-            }
+                jugador.moverIzquierda();
                 break;
 
             case "d":
-            posicion = jugador.getCordenadaX() + jugador.getVelocidad();
-            if(posicion > 0 || posicion < mapa.getMapaGenerado().length - 1){
-                jugador.setCordenadaX(posicion);
-                seMueve = true;
-            }
+                jugador.moverDercha();
                 break;
 
             default:
                 msg = "No se puede mover el jugador :V";
                 break;
         }
-        if(!seMueve){
-            msg = "Te vas a comer el muro mamarracho :V";
-        }
-        /* 
-        mapaAnterior[jugador.getCordenadaY()][jugador.getCordenadaX()] = "O";
-        mapa.setMapaGenerado(mapaAnterior);
-        msg = "posicion x: " + jugador.getCordenadaX() + ", posicion y: " + jugador.getCordenadaY();
-        System.out.println(msg);
-        String msg2 = "";
-        for (int i = 0; i < mapaAnterior.length; i++) {
-            for (int j = 0; j < mapaAnterior.length; j++) {
-                msg2 += mapaAnterior[i][j] + "  ";
-            }
-            msg2 += "\n";
-        }
-        System.out.println(msg2);*/
     }
-    
+
+    public void mostrarMapaActualizado() {
+        String[][] mapaParaActualizar = mapa.getMapaGenerado();
+        String msg = "";
+        if (mapa.esTransitable(jugador)) {
+            for (int i = 0; i < mapaParaActualizar.length; i++) {
+                for (int j = 0; j < mapaParaActualizar.length; j++) {
+                    if (jugador.getCordenadaX() + 1 == j && jugador.getCordenadaY() + 1 == i) {
+                        msg += "O  ";
+                    } else {
+                        msg += mapaParaActualizar[i][j] + "  ";
+                    }
+                }
+                msg += "\n";
+            }
+        } else {
+            for (int i = 0; i < mapaParaActualizar.length; i++) {
+                for (int j = 0; j < mapaParaActualizar.length; j++) {
+                    if (jugador.getCordenadaX() == j && jugador.getCordenadaY() == i) {
+                        msg += "O  ";
+                    } else {
+                        msg += mapaParaActualizar[i][j] + "  ";
+                    }
+                }
+                msg += "\n";
+            }
+        }
+        System.out.println(msg);
+    }
+
 }
