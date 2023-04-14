@@ -14,7 +14,7 @@ public class MenuDelJuego {
 
     public void montarBicicleta() {
         String msg = "El personaje ya se encuentra en la bicicleta.";
-        if (!jugador.setMontarBicicleta()) {
+        if (!jugador.getMontarBicicleta()) {
             jugador.setMontarBicicleta(true);
             jugador.setVelocidad(2);
         } else {
@@ -24,7 +24,7 @@ public class MenuDelJuego {
 
     public void caminando() {
         String msg = "El personaje ya estabacaminando.";
-        if (jugador.setMontarBicicleta()) {
+        if (jugador.getMontarBicicleta()) {
             jugador.setMontarBicicleta(false);
             jugador.setVelocidad(1);
         } else {
@@ -35,57 +35,70 @@ public class MenuDelJuego {
     public void desplazarPersonaje(String movimiento) {
         String msg = "";
         String[][] mapaAnterior = mapa.getMapaGenerado();
-        int posicion;
+        int posicion = 1;
+        boolean esTransitable = false;
 
-        // TODO: quitar el condicional y ponerlo cuando imprima al jugador
         switch (movimiento.toLowerCase()) {
             case "w":
-                jugador.moverArriba();
+                posicion = jugador.moverArriba();
+                if (posicion >= 0 && posicion <= mapaAnterior.length - 3) {
+                    jugador.setCordenadaY(posicion);
+                    esTransitable = true;
+                }
+                msg = "El personaje se ha movido hacia arriba";
                 break;
 
             case "s":
-                jugador.moverAbajo();
+                posicion = jugador.moverAbajo();
+                if (posicion >= 0 && posicion <= mapaAnterior.length - 3) {
+                    jugador.setCordenadaY(posicion);
+                    esTransitable = true;
+                }
+                msg = "El personaje se ha movido hacia abajo";
                 break;
 
             case "a":
-                jugador.moverIzquierda();
+                posicion = jugador.moverIzquierda();
+                if (posicion >= 0 && posicion <= mapaAnterior.length - 3) {
+                    jugador.setCordenadaX(posicion);
+                    esTransitable = true;
+                }
+                msg = "El personaje se ha movido hacia la izquierda";
                 break;
 
             case "d":
-                jugador.moverDercha();
+                posicion = jugador.moverDerecha();
+                if (posicion >= 0 && posicion <= mapaAnterior.length - 3) {
+                    jugador.setCordenadaX(posicion);
+                    esTransitable = true;
+                }
+                msg = "El personaje se ha movido hacia la derecha";
                 break;
 
             default:
                 msg = "No se puede mover el jugador :V";
                 break;
         }
+        if (!esTransitable) {
+            msg = "TE VAS A COMER EL MURO MI NIÑO :V";
+        }
+        System.out.println(msg);
     }
 
-    public void mostrarMapaActualizado() {
-        String[][] mapaParaActualizar = mapa.getMapaGenerado();
+    public void mostrar() {
         String msg = "";
-        if (mapa.esTransitable(jugador)) {
-            for (int i = 0; i < mapaParaActualizar.length; i++) {
-                for (int j = 0; j < mapaParaActualizar.length; j++) {
-                    if (jugador.getCordenadaX() + 1 == j && jugador.getCordenadaY() + 1 == i) {
-                        msg += "O  ";
-                    } else {
-                        msg += mapaParaActualizar[i][j] + "  ";
-                    }
+        String[][] mapaMostrado = mapa.getMapaGenerado();
+        int posicionX = jugador.getCordenadaX();
+        int posicionY = jugador.getCordenadaY();
+        for (int i = 0; i < mapaMostrado.length; i++) {
+            for (int j = 0; j < mapaMostrado.length; j++) {
+                if ((posicionY + 1) == i && (posicionX + 1) == j) {
+                    msg += "O  ";
+                } else {
+                    msg += mapaMostrado[i][j] + "  ";
                 }
-                msg += "\n";
             }
-        } else {
-            for (int i = 0; i < mapaParaActualizar.length; i++) {
-                for (int j = 0; j < mapaParaActualizar.length; j++) {
-                    if (jugador.getCordenadaX() == j && jugador.getCordenadaY() == i) {
-                        msg += "O  ";
-                    } else {
-                        msg += mapaParaActualizar[i][j] + "  ";
-                    }
-                }
-                msg += "\n";
-            }
+            msg += "\n";
         }
         System.out.println(msg);
     }

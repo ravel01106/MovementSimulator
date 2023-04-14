@@ -50,7 +50,7 @@ public class Personaje {
         this.velocidad = velocidad;
     }
 
-    public boolean setMontarBicicleta() {
+    public boolean getMontarBicicleta() {
         return montarBicicleta;
     }
 
@@ -58,20 +58,24 @@ public class Personaje {
         this.montarBicicleta = montarBicicleta;
     }
 
-    public void moverDercha() {
-        this.cordenadaX += this.velocidad;
+    public int moverArriba() {
+        int posicion = this.cordenadaY - this.velocidad;
+        return posicion;
     }
 
-    public void moverIzquierda() {
-        this.cordenadaX -= this.velocidad;
+    public int moverAbajo() {
+        int posicion = this.cordenadaY + this.velocidad;
+        return posicion;
     }
 
-    public void moverArriba() {
-        this.cordenadaY -= this.velocidad;
+    public int moverIzquierda() {
+        int posicion = this.cordenadaX - this.velocidad;
+        return posicion;
     }
 
-    public void moverAbajo() {
-        this.cordenadaY += this.velocidad;
+    public int moverDerecha() {
+        int posicion = this.cordenadaX + this.velocidad;
+        return posicion;
     }
 
 }
