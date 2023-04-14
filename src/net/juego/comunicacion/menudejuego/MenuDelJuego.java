@@ -36,11 +36,21 @@ public class MenuDelJuego {
         String msg = "";
         String[][] mapaAnterior = mapa.getMapaGenerado();
         int posicion = 1;
+        int posicionXEnMapa = 1;
+        int posicionYEnMapa = 1;
         boolean esTransitable = false;
 
         switch (movimiento.toLowerCase()) {
             case "w":
                 posicion = jugador.moverArriba();
+                posicionYEnMapa = posicion + 1;
+                posicionXEnMapa = jugador.getCordenadaX() + 1;
+                try {
+                    if (jugador.getMontarBicicleta() && mapaAnterior[posicionYEnMapa][posicionXEnMapa] == "#") {
+                        posicion += 1;
+                    }
+                } catch (ArrayIndexOutOfBoundsException e) {
+                }
                 if (posicion >= 0 && posicion <= mapaAnterior.length - 3) {
                     jugador.setCordenadaY(posicion);
                     esTransitable = true;
@@ -50,15 +60,33 @@ public class MenuDelJuego {
 
             case "s":
                 posicion = jugador.moverAbajo();
+                posicionYEnMapa = posicion + 1;
+                posicionXEnMapa = jugador.getCordenadaX() + 1;
+                try {
+                    if (jugador.getMontarBicicleta() && mapaAnterior[posicionYEnMapa][posicionXEnMapa] == "#") {
+                        posicion -= 1;
+                    }
+                } catch (ArrayIndexOutOfBoundsException e) {
+                }
+
                 if (posicion >= 0 && posicion <= mapaAnterior.length - 3) {
                     jugador.setCordenadaY(posicion);
                     esTransitable = true;
                 }
+
                 msg = "El personaje se ha movido hacia abajo";
                 break;
 
             case "a":
                 posicion = jugador.moverIzquierda();
+                posicionYEnMapa = jugador.getCordenadaY() + 1;
+                posicionXEnMapa = posicion + 1;
+                try {
+                    if (jugador.getMontarBicicleta() && mapaAnterior[posicionYEnMapa][posicionXEnMapa] == "#") {
+                        posicion += 1;
+                    }
+                } catch (ArrayIndexOutOfBoundsException e) {
+                }
                 if (posicion >= 0 && posicion <= mapaAnterior.length - 3) {
                     jugador.setCordenadaX(posicion);
                     esTransitable = true;
@@ -68,6 +96,14 @@ public class MenuDelJuego {
 
             case "d":
                 posicion = jugador.moverDerecha();
+                posicionYEnMapa = jugador.getCordenadaY() + 1;
+                posicionXEnMapa = posicion + 1;
+                try {
+                    if (jugador.getMontarBicicleta() && mapaAnterior[posicionYEnMapa][posicionXEnMapa] == "#") {
+                        posicion -= 1;
+                    }
+                } catch (ArrayIndexOutOfBoundsException e) {
+                }
                 if (posicion >= 0 && posicion <= mapaAnterior.length - 3) {
                     jugador.setCordenadaX(posicion);
                     esTransitable = true;
@@ -93,7 +129,11 @@ public class MenuDelJuego {
         for (int i = 0; i < mapaMostrado.length; i++) {
             for (int j = 0; j < mapaMostrado.length; j++) {
                 if ((posicionY + 1) == i && (posicionX + 1) == j) {
-                    msg += "O  ";
+                    if (jugador.getMontarBicicleta()) {
+                        msg += "8  ";
+                    } else {
+                        msg += "O  ";
+                    }
                 } else {
                     msg += mapaMostrado[i][j] + "  ";
                 }
