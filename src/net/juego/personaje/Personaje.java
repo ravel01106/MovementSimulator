@@ -8,8 +8,6 @@ public class Personaje {
     private int velocidad;
     private boolean montarBicicleta;
 
-    // CONSTRUCTOR
-    // TODO: poner los movimientos aqui
     public Personaje(String nombre) {
         this.nombre = nombre;
         this.cordenadaX = 0;

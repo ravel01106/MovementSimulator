@@ -2,6 +2,7 @@ package net.juego.comunicacion.menudejuego;
 
 import net.juego.mapa.Mapa;
 import net.juego.personaje.Personaje;
+import net.juego.utils.generadormapa.GeneradorDeMapas;
 
 public class MenuDelJuego {
     private Personaje jugador;
@@ -10,34 +11,31 @@ public class MenuDelJuego {
     private int posicionYEnMapa = 1;
     private String[][] mapaGenerado;
 
-
     public MenuDelJuego(Mapa mapa, Personaje jugador) {
         this.jugador = jugador;
         this.mapa = mapa;
         this.mapaGenerado = this.mapa.getMapaGenerado();
     }
 
-
     public void montarBicicleta() {
         String msg = "El personaje ya se encuentra en la bicicleta.";
         if (!jugador.getMontarBicicleta()) {
             jugador.setMontarBicicleta(true);
             jugador.setVelocidad(2);
-        } else {
-            System.out.println(msg);
+            msg = "El jugador se ha montado en la bicicleta";
         }
+        System.out.println(msg);
     }
 
     public void caminando() {
-        String msg = "El personaje ya estabacaminando.";
+        String msg = "El personaje ya estaba caminando.";
         if (jugador.getMontarBicicleta()) {
             jugador.setMontarBicicleta(false);
             jugador.setVelocidad(1);
-        } else {
-            System.out.println(msg);
+            msg = "El jugador se ha desmontado de la bicicleta";
         }
+        System.out.println(msg);
     }
-
 
     public void desplazarPersonaje(String movimiento) {
         String msg = "";
@@ -82,7 +80,6 @@ public class MenuDelJuego {
         System.out.println(msg);
     }
 
-
     private boolean comprobarPosicionArriba(int posicion) {
         posicionYEnMapa = posicion + 1;
         posicionXEnMapa = jugador.getCordenadaX() + 1;
@@ -109,7 +106,6 @@ public class MenuDelJuego {
         return false;
     }
 
-
     private boolean comprobarPosicionAbajo(int posicion) {
         posicionYEnMapa = posicion + 1;
         posicionXEnMapa = jugador.getCordenadaX() + 1;
@@ -129,7 +125,6 @@ public class MenuDelJuego {
         return false;
     }
 
-
     private boolean comprobarPosicionIzquierda(int posicion) {
         posicionYEnMapa = jugador.getCordenadaY() + 1;
         posicionXEnMapa = posicion + 1;
@@ -147,7 +142,6 @@ public class MenuDelJuego {
 
         return false;
     }
-
 
     private boolean comprobarPosicionDerecha(int posicion) {
         posicionYEnMapa = jugador.getCordenadaY() + 1;
@@ -168,7 +162,6 @@ public class MenuDelJuego {
         return false;
 
     }
-
 
     public void mostrar() {
         StringBuilder msgBuilder = new StringBuilder("Mostrando mapa:\n");
@@ -201,14 +194,12 @@ public class MenuDelJuego {
         System.out.println(msgBuilder);
     }
 
-
-    public String leyendaJuego(){
-        String msg = "Leyenda del juego:\n";
-        msg += "# -> Borde del mapa (no accesible)\n";
-        msg += "X -> Suelo del mapa (accesible)\n";
+    public String leyendaJuego() {
+        String msg = GeneradorDeMapas.leyenda() + "\n";
         msg += "O -> Posición del personaje (caminando)\n";
         msg += "8 -> Posición del personaje (en bicicleta)\n";
         return msg;
+
     }
 
 }
