@@ -10,11 +10,13 @@ public class MenuDelJuego {
     private int posicionYEnMapa = 1;
     private String[][] mapaGenerado;
 
+
     public MenuDelJuego(Mapa mapa, Personaje jugador) {
         this.jugador = jugador;
         this.mapa = mapa;
         this.mapaGenerado = this.mapa.getMapaGenerado();
     }
+
 
     public void montarBicicleta() {
         String msg = "El personaje ya se encuentra en la bicicleta.";
@@ -36,6 +38,7 @@ public class MenuDelJuego {
         }
     }
 
+
     public void desplazarPersonaje(String movimiento) {
         String msg = "";
         int posicion = 1;
@@ -45,36 +48,40 @@ public class MenuDelJuego {
             case "w":
                 posicion = jugador.moverArriba();
                 esTransitable = comprobarPosicionArriba(posicion);
-                msg = "El personaje se ha movido hacia arriba";
+                msg = "El personaje se ha movido correctamente hacia arriba.";
                 break;
 
             case "s":
                 posicion = jugador.moverAbajo();
                 esTransitable = comprobarPosicionAbajo(posicion);
-                msg = "El personaje se ha movido hacia abajo";
+                msg = "El personaje se ha movido correctamente hacia abajo.";
                 break;
 
             case "a":
                 posicion = jugador.moverIzquierda();
                 esTransitable = comprobarPosicionIzquierda(posicion);
-                msg = "El personaje se ha movido hacia la izquierda";
+                msg = "El personaje se ha movido correctamente hacia la izquierda.";
                 break;
 
             case "d":
                 posicion = jugador.moverDerecha();
                 esTransitable = comprobarPosicionDerecha(posicion);
-                msg = "El personaje se ha movido hacia la derecha";
+                msg = "El personaje se ha movido correctamente hacia la derecha.";
                 break;
 
             default:
-                msg = "No se puede mover el jugador :V";
+                msg = "No se puede mover el personaje debido a";
+                msg += " que no ha elegido una opción correcta.";
+                esTransitable = true;
                 break;
         }
         if (!esTransitable) {
-            msg = "TE VAS A COMER EL MURO MI NIÑO :V";
+            msg = "El personaje no puede avanzar a la posición deseada";
+            msg += " debido a que va a chocar contra un muro.";
         }
         System.out.println(msg);
     }
+
 
     private boolean comprobarPosicionArriba(int posicion) {
         posicionYEnMapa = posicion + 1;
@@ -102,6 +109,7 @@ public class MenuDelJuego {
         return false;
     }
 
+
     private boolean comprobarPosicionAbajo(int posicion) {
         posicionYEnMapa = posicion + 1;
         posicionXEnMapa = jugador.getCordenadaX() + 1;
@@ -121,6 +129,7 @@ public class MenuDelJuego {
         return false;
     }
 
+
     private boolean comprobarPosicionIzquierda(int posicion) {
         posicionYEnMapa = jugador.getCordenadaY() + 1;
         posicionXEnMapa = posicion + 1;
@@ -138,6 +147,7 @@ public class MenuDelJuego {
 
         return false;
     }
+
 
     private boolean comprobarPosicionDerecha(int posicion) {
         posicionYEnMapa = jugador.getCordenadaY() + 1;
@@ -159,8 +169,9 @@ public class MenuDelJuego {
 
     }
 
+
     public void mostrar() {
-        String msg = "";
+        StringBuilder msgBuilder = new StringBuilder("Mostrando mapa:\n");
         String[][] mapaMostrado = mapa.getMapaGenerado();
         int posicionX = jugador.getCordenadaX();
         int posicionY = jugador.getCordenadaY();
@@ -172,22 +183,32 @@ public class MenuDelJuego {
                 if ((posicionY + 1) == i && (posicionX + 1) == j) {
 
                     if (jugador.getMontarBicicleta()) {
-                        msg += "8  ";
+                        msgBuilder.append("8  ");
 
                     } else {
-                        msg += "O  ";
+                        msgBuilder.append("O  ");
                     }
 
                 } else {
-                    msg += mapaMostrado[i][j] + "  ";
+                    msgBuilder.append(mapaMostrado[i][j]).append("  ");
 
                 }
             }
 
-            msg += "\n";
+            msgBuilder.append("\n");
         }
 
-        System.out.println(msg);
+        System.out.println(msgBuilder);
+    }
+
+
+    public String leyendaJuego(){
+        String msg = "Leyenda del juego:\n";
+        msg += "# -> Borde del mapa (no accesible)\n";
+        msg += "X -> Suelo del mapa (accesible)\n";
+        msg += "O -> Posición del personaje (caminando)\n";
+        msg += "8 -> Posición del personaje (en bicicleta)\n";
+        return msg;
     }
 
 }

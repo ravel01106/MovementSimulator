@@ -58,6 +58,8 @@ public class App {
                 menu.desplazarPersonaje("a");
 
                 menu.mostrar();
+                System.out.println(menu.leyendaJuego());
+                menu.desplazarPersonaje("f");
 
         }
 }
