@@ -5,4 +5,4 @@ El objetivo de este proyecto es crear el minijuego con movimiento bidimensional 
 
 ## Estructura
 El proyecto se divide en **5 clases** diferentes:
-- [Clase Personaje] (docs/PERSONAJE.md)
+-[Clase Personaje](./docs/PERSONAJE.md)
