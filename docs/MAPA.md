@@ -1,4 +1,4 @@
-# Clase mapa
+# Clase Mapa
 
 ## Descripción
 
