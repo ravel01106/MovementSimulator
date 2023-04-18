@@ -11,20 +11,20 @@ public class Juego {
     static String msg = "Bienvenido usuario!\n";
 
     public static int pedirTamañoMapa() {
-        msg = "Introduzca el tamaño del mapa: ";
+        msg = "Introduzca el tamaño del mapa:";
         System.out.println(msg);
         try {
             return Integer.parseInt(TECLADO.nextLine());
         } catch (NumberFormatException e) {
             msg = "Me ha introducido mal el número, ";
-            msg += "por lo que, le pondremos el numero 10 por defecto";
+            msg += "por lo que, le pondremos el numero 10 por defecto.\n";
             System.out.println(msg);
             return 10;
         }
     }
 
     public static String pedirNombreJugador() {
-        msg = "Introduzca el nombre que quiere que tenga el personaje";
+        msg = "Introduzca el nombre que quiere que tenga el personaje:";
         System.out.println(msg);
         return TECLADO.nextLine();
     }
@@ -62,25 +62,25 @@ public class Juego {
     public static void MontarDesmontarBicicleta(MenuDelJuego menu) {
         boolean eleccionCorrectaBicicleta = false;
         String eleccionMontarDesmontar;
-        while (!eleccionCorrectaBicicleta) {
+        do {
+            eleccionCorrectaBicicleta = true;
             msgMenuBicicleta();
             eleccionMontarDesmontar = eleccionMontarDesmontarBicicleta();
             switch (eleccionMontarDesmontar) {
                 case "g":
                     menu.montarBicicleta();
-                    eleccionCorrectaBicicleta = true;
                     break;
                 case "t":
                     menu.caminando();
-                    eleccionCorrectaBicicleta = true;
                     break;
 
                 default:
-                    msg = "Lo siento, elija una opcion correcta";
+                    msg = "Lo siento, elija una opcion correcta.\n";
+                    eleccionCorrectaBicicleta = false;
                     System.out.println(msg);
                     break;
             }
-        }
+        } while (!eleccionCorrectaBicicleta);
     }
 
     public static void main(String[] args) {
@@ -121,7 +121,7 @@ public class Juego {
                     break;
 
                 default:
-                    msg = "Elija una de las opciones mostradas por pantalla.";
+                    msg = "Elija una de las opciones mostradas por pantalla.\n";
                     System.out.println(msg);
 
                     break;

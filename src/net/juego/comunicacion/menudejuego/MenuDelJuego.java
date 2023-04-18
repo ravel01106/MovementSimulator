@@ -18,21 +18,21 @@ public class MenuDelJuego {
     }
 
     public void montarBicicleta() {
-        String msg = "El personaje ya se encuentra en la bicicleta.";
+        String msg = "El personaje ya se encuentra en la bicicleta.\n";
         if (!jugador.getMontarBicicleta()) {
             jugador.setMontarBicicleta(true);
             jugador.setVelocidad(2);
-            msg = "El jugador se ha montado en la bicicleta";
+            msg = "El jugador se ha montado en la bicicleta.\n";
         }
         System.out.println(msg);
     }
 
     public void caminando() {
-        String msg = "El personaje ya estaba caminando.";
+        String msg = "El personaje ya estaba caminando.\n";
         if (jugador.getMontarBicicleta()) {
             jugador.setMontarBicicleta(false);
             jugador.setVelocidad(1);
-            msg = "El jugador se ha desmontado de la bicicleta";
+            msg = "El jugador se ha desmontado de la bicicleta.\n";
         }
         System.out.println(msg);
     }
@@ -46,36 +46,36 @@ public class MenuDelJuego {
             case "w":
                 posicion = jugador.moverArriba();
                 esTransitable = comprobarPosicionArriba(posicion);
-                msg = "El personaje se ha movido correctamente hacia arriba.";
+                msg = "El personaje se ha movido correctamente hacia arriba.\n";
                 break;
 
             case "s":
                 posicion = jugador.moverAbajo();
                 esTransitable = comprobarPosicionAbajo(posicion);
-                msg = "El personaje se ha movido correctamente hacia abajo.";
+                msg = "El personaje se ha movido correctamente hacia abajo.\n";
                 break;
 
             case "a":
                 posicion = jugador.moverIzquierda();
                 esTransitable = comprobarPosicionIzquierda(posicion);
-                msg = "El personaje se ha movido correctamente hacia la izquierda.";
+                msg = "El personaje se ha movido correctamente hacia la izquierda.\n";
                 break;
 
             case "d":
                 posicion = jugador.moverDerecha();
                 esTransitable = comprobarPosicionDerecha(posicion);
-                msg = "El personaje se ha movido correctamente hacia la derecha.";
+                msg = "El personaje se ha movido correctamente hacia la derecha.\n";
                 break;
 
             default:
                 msg = "No se puede mover el personaje debido a";
-                msg += " que no ha elegido una opción correcta.";
+                msg += " que no ha elegido una opción correcta.\n";
                 esTransitable = true;
                 break;
         }
         if (!esTransitable) {
             msg = "El personaje no puede avanzar a la posición deseada";
-            msg += " debido a que va a chocar contra un muro.";
+            msg += " debido a que va a chocar contra un muro.\n";
         }
         System.out.println(msg);
     }
@@ -84,19 +84,12 @@ public class MenuDelJuego {
         posicionYEnMapa = posicion + 1;
         posicionXEnMapa = jugador.getCordenadaX() + 1;
 
-        // si la posicion se sale del array
         if (posicion >= -1 && posicion <= mapaGenerado.length - 2) {
 
-            // Si el personaje esta montado en bicicleta y la posicion en la que se quiera
-            // mover es un muro
-            // Debido a que siempre se mueve dos casillas y en este caso se deberia mover
-            // una
             if (jugador.getMontarBicicleta() && mapaGenerado[posicionYEnMapa][posicionXEnMapa] == "#") {
                 posicion += 1;
             }
 
-            // Aqui vemos que el jugador, independiente mente si va caminando o en bici no
-            // se da contra el muro
             if (posicion >= 0 && posicion <= mapaGenerado.length - 3) {
                 jugador.setCordenadaY(posicion);
                 return true;

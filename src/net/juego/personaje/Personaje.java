@@ -1,7 +1,7 @@
 package net.juego.personaje;
 
 public class Personaje {
-    // ATRIBUTOS
+
     private String nombre;
     private int cordenadaX;
     private int cordenadaY;
