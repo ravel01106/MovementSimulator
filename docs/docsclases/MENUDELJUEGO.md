@@ -17,4 +17,6 @@ En esta clase Vamos a realizar la parte más compleja. En este caso vamos a tene
     - **Si al modificarlo NO se choca con una pared**. Si se cocha, no se modifica la posición 
     - **Si va montado el bicicleta y cuando se mueva no se choca con una pared**, si pasa eso cambia su velocidad a 1, para evitaar chocarse.
 
+- El tercer método es la representación del mapa donde dentro tenemos al jugador. Es decir, cuando la posición x e y coincida con un punto determinado del mapa pintamos al personaje con o sin la bicicleta.
+
 - Por último, tendremos un metodo de leyenda donde llamamos a la leyenda de la clase GeneradorDeMapa, y la aumentamos con 2 nuevas lineas siendo como se ve el personaje caminando y como se ve el personaje montado en la bicicleta.
