@@ -11,6 +11,7 @@ En esta clase Vamos a realizar la parte más compleja. En este caso vamos a tene
     - S: para ir hacia abajo. 
     - A: para ir hacia la izquierda. 
     - D: para ir hacia la derecha.
+
 Para ello usamos una variable local donde dependiendo del parametro modificamos el posicionamiento del personaje para luego realizar una serie de comprobaciones antes de modifcar el posicionamiento del personaje (para verse mejor se crearon métodos privados para las comprobaciones): 
     - Si al modificarlo NO se sale del mapa. Si se sale, no se modifica la posición. 
     - Si al modificarlo NO se choca con una pared. Si se cocha, no se modifica la posición 
